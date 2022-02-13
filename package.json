@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/0idea0/goit-node-hw-01#readme",
   "dependencies": {
-    "command": "0.0.5"
+    "commander": "9.0.0"
   }
 }
