@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/0idea0/goit-node-hw-01#readme",
   "dependencies": {
-    "commander": "9.0.0"
+    "commander": "9.0.0",
+    "uuid": "8.3.2"
   }
 }

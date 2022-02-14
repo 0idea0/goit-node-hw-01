@@ -1,17 +1,17 @@
-const { Command } = require('commander');
-const { listContacts, addContact } = require('./contact')
+const { Command } = require('commander')
+const { listContacts, addContact, getContactById, removeContact } = require('./contacts/options')
 
-const program = new Command();
+const program = new Command()
 program
   .option('-a, --action <type>', 'choose action')
   .option('-i, --id <type>', 'user id')
   .option('-n, --name <type>', 'user name')
   .option('-e, --email <type>', 'user email')
-  .option('-p, --phone <type>', 'user phone');
+  .option('-p, --phone <type>', 'user phone')
 
-program.parse(process.argv);
+program.parse(process.argv)
 
-const argv = program.opts();
+const argv = program.opts()
 
 // TODO: рефакторить
 async function invokeAction({ action, id, name, email, phone }) {
@@ -19,24 +19,29 @@ async function invokeAction({ action, id, name, email, phone }) {
     case 'list':
       const contacts = await listContacts()
       console.table(contacts)
-      break;
+      break
 
     case 'get':
-      // ... id
-      break;
+      const contactById = await getContactById(id)
+      if (!contactById) {
+        throw new Error(`Product with id=${id} not found`);
+      }
+      console.log(contactById)
+      break
 
     case 'add':
       const contact = await addContact(name, email, phone)
       console.log(contact)
-      break;
+      break
 
     case 'remove':
-      // ... id
+      const removeProduct = await removeContact(id);
+      console.log(removeProduct);
       break;
 
     default:
-      console.warn('\x1B[31m Unknown action type!');
+      console.warn('\x1B[31m Unknown action type!')
   }
 }
 
-invokeAction(argv);
+invokeAction(argv)
