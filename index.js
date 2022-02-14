@@ -1,5 +1,5 @@
 const { Command } = require('commander');
-const { listContacts } = require('./contact')
+const { listContacts, addContact } = require('./contact')
 
 const program = new Command();
 program
@@ -26,7 +26,8 @@ async function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case 'add':
-      // ... name email phone
+      const contact = await addContact(name, email, phone)
+      console.log(contact)
       break;
 
     case 'remove':
